@@ -53,11 +53,9 @@ func part2() {
 	for scanner.Scan() {
 		text := scanner.Text()
 		if text == "" {
-			min, _ := queue.Peek()
-			intMin, _ := min.(int)
 			if queue.Size() < num {
 				queue.Enqueue(elfTotal)
-			} else if min != nil && elfTotal > intMin {
+			} else if min, _ := queue.Peek(); elfTotal > min.(int) {
 				queue.Dequeue()
 				queue.Enqueue(elfTotal)
 			}
@@ -70,8 +68,7 @@ func part2() {
 	grandTotal := 0
 	for queue.Size() > 0 {
 		num, _ := queue.Dequeue()
-		intNum, _ := num.(int)
-		grandTotal += intNum
+		grandTotal += num.(int)
 	}
 	fmt.Println("Total:", grandTotal)
 }
