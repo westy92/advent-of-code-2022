@@ -21,7 +21,7 @@ func getItem(grid *arraylist.List, r int, c int) int {
 	return itm
 }
 
-func main() {
+func day8() {
 	input, _ := os.Open("input.txt")
 	defer input.Close()
 

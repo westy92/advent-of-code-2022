@@ -22,7 +22,7 @@ type Item struct {
 	Children *hashmap.Map
 }
 
-func main() {
+func day7() {
 	input, _ := os.Open("input.txt")
 	defer input.Close()
 

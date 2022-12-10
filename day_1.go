@@ -10,12 +10,12 @@ import (
 	"github.com/emirpasic/gods/utils"
 )
 
-func main() {
-	part1()
-	part2()
+func day1() {
+	day1part1()
+	day1part2()
 }
 
-func part1() {
+func day1part1() {
 	println("Part 1:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()
@@ -39,7 +39,7 @@ func part1() {
 	fmt.Println("Max:", max)
 }
 
-func part2() {
+func day1part2() {
 	println("Part 2:")
 	num := 3
 	queue := pq.NewWith(utils.IntComparator)

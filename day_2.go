@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func main() {
-	part1()
-	part2()
+func day2() {
+	day2part1()
+	day2part2()
 }
 
 var m = map[string]string{
@@ -59,7 +59,7 @@ func determineOutcome2(p1 string, end string) int {
 	}
 }
 
-func part1() {
+func day2part1() {
 	println("Part 1:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()
@@ -75,7 +75,7 @@ func part1() {
 	fmt.Println("Score:", total)
 }
 
-func part2() {
+func day2part2() {
 	println("Part 2:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()

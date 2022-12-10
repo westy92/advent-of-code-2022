@@ -7,9 +7,9 @@ import (
 	"github.com/emirpasic/gods/sets/hashset"
 )
 
-func main() {
-	part1()
-	part2()
+func day6() {
+	day6part1()
+	day6part2()
 }
 
 func containsDuplicates(s string) bool {
@@ -21,7 +21,7 @@ func containsDuplicates(s string) bool {
 	return len(s) != set.Size()
 }
 
-func part1() {
+func day6part1() {
 	println("Part 1:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()
@@ -42,7 +42,7 @@ func part1() {
 	}
 }
 
-func part2() {
+func day6part2() {
 	println("Part 2:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()

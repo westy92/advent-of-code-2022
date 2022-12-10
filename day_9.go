@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 
@@ -44,7 +45,7 @@ func (c Coords) Right() Coords {
 	return c
 }
 
-func main() {
+func day9() {
 	input, _ := os.Open("input.txt")
 	defer input.Close()
 
@@ -52,15 +53,10 @@ func main() {
 	scanner.Split(bufio.ScanLines)
 
 	tailVisited := hashset.New()
-	head := Coords{
-		Row:    0,
-		Column: 0,
-	}
-	tail := Coords{
-		Row:    0,
-		Column: 0,
-	}
-	tailVisited.Add(head)
+	knots := 10
+	knot := make([]Coords, knots, knots)
+	prevState := make([]Coords, knots, knots)
+	tailVisited.Add(knot[knots-1])
 
 	for scanner.Scan() {
 		text := scanner.Text()
@@ -68,76 +64,99 @@ func main() {
 		switch text[0] {
 		case 'L':
 			for i := 0; i < num; i++ {
-				head = head.Left()
-				if !tail.Touches(head, true) {
-					tail = tail.Left()
-					if !tail.Touches(head, false) {
-						if tail.Up().Touches(head, false) {
-							tail = tail.Up()
-						} else {
-							tail = tail.Down()
+				prevTail := knot[knots-1]
+				copy(prevState, knot)
+				knot[0] = knot[0].Left()
+				for s := 0; s < 1; s++ { // TODO remove
+					if !knot[s+1].Touches(knot[s], true) {
+						knot[s+1] = knot[s+1].Left()
+						if !knot[s+1].Touches(knot[s], false) {
+							if knot[s+1].Up().Touches(knot[s], false) {
+								knot[s+1] = knot[s+1].Up()
+							} else {
+								knot[s+1] = knot[s+1].Down()
+							}
 						}
 					}
-					tailVisited.Add(tail)
+				}
+				// bubble rest
+				/*for k := 1; k < knots; k++ {
+					knot[k+1] = knot[k]
+				}*/
+				if knot[knots-1] != prevTail {
+					tailVisited.Add(knot[knots-1])
 				}
 			}
-			println()
+			fmt.Println(knot)
 		case 'R':
 			for i := 0; i < num; i++ {
-				head = head.Right()
-				if !tail.Touches(head, true) {
-					tail = tail.Right()
-					if !tail.Touches(head, false) {
-						if tail.Up().Touches(head, false) {
-							tail = tail.Up()
-						} else {
-							tail = tail.Down()
+				prevTail := knot[knots-1]
+				knot[0] = knot[0].Right()
+				for s := 0; s < 1; s++ { // TODO remove
+					if !knot[s+1].Touches(knot[s], true) {
+						knot[s+1] = knot[s+1].Right()
+						if !knot[s+1].Touches(knot[s], false) {
+							if knot[s+1].Up().Touches(knot[s], false) {
+								knot[s+1] = knot[s+1].Up()
+							} else {
+								knot[s+1] = knot[s+1].Down()
+							}
 						}
 					}
-					tailVisited.Add(tail)
+				}
+				if knot[knots-1] != prevTail {
+					tailVisited.Add(knot[knots-1])
 				}
 			}
-			println()
+			fmt.Println(knot)
 		case 'U':
 			for i := 0; i < num; i++ {
-				head = head.Up()
-				if !tail.Touches(head, true) {
-					tail = tail.Up()
-					if !tail.Touches(head, false) {
-						if tail.Right().Touches(head, false) {
-							tail = tail.Right()
-						} else {
-							tail = tail.Left()
+				prevTail := knot[knots-1]
+				knot[0] = knot[0].Up()
+				for s := 0; s < 1; s++ { // TODO remove
+					if !knot[s+1].Touches(knot[s], true) {
+						knot[s+1] = knot[s+1].Up()
+						if !knot[s+1].Touches(knot[s], false) {
+							if knot[s+1].Left().Touches(knot[s], false) {
+								knot[s+1] = knot[s+1].Left()
+							} else {
+								knot[s+1] = knot[s+1].Right()
+							}
 						}
 					}
-					tailVisited.Add(tail)
+				}
+				if knot[knots-1] != prevTail {
+					tailVisited.Add(knot[knots-1])
 				}
 			}
-			println()
+			fmt.Println(knot)
 		case 'D':
 			for i := 0; i < num; i++ {
-				head = head.Down()
-				if !tail.Touches(head, true) {
-					tail = tail.Down()
-					if !tail.Touches(head, false) {
-						if tail.Right().Touches(head, false) {
-							tail = tail.Right()
-						} else {
-							tail = tail.Left()
+				prevTail := knot[knots-1]
+				knot[0] = knot[0].Down()
+				for s := 0; s < 1; s++ { // TODO remove
+					if !knot[s+1].Touches(knot[s], true) {
+						knot[s+1] = knot[s+1].Down()
+						if !knot[s+1].Touches(knot[s], false) {
+							if knot[s+1].Left().Touches(knot[s], false) {
+								knot[s+1] = knot[s+1].Left()
+							} else {
+								knot[s+1] = knot[s+1].Right()
+							}
 						}
 					}
-					tailVisited.Add(tail)
+				}
+				if knot[knots-1] != prevTail {
+					tailVisited.Add(knot[knots-1])
 				}
 			}
-			println()
+			fmt.Println(knot)
 		}
-
 	}
 
 	println("Part 1: " + strconv.Itoa(tailVisited.Size()))
-	//println(tailVisited)
-	//s, _ := json.MarshalIndent(tailVisited, "", "\t")
-	//fmt.Print(string(s))
+
+	fmt.Println(tailVisited)
 
 	//println("Part 2: " + strconv.Itoa(part2))
 }

@@ -8,9 +8,9 @@ import (
 	"github.com/emirpasic/gods/sets/hashset"
 )
 
-func main() {
-	part1()
-	part2()
+func day3() {
+	day3part1()
+	day3part2()
 }
 
 func points(char rune) int {
@@ -39,7 +39,7 @@ func do1(text string) int {
 	return 0
 }
 
-func part1() {
+func day3part1() {
 	println("Part 1:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()
@@ -54,7 +54,7 @@ func part1() {
 	fmt.Println("Score:", total)
 }
 
-func part2() {
+func day3part2() {
 	println("Part 2:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()

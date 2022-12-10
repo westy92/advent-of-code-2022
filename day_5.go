@@ -9,12 +9,12 @@ import (
 	lls "github.com/emirpasic/gods/stacks/linkedliststack"
 )
 
-func main() {
-	part1()
-	part2()
+func day5() {
+	day5part1()
+	day5part2()
 }
 
-func part1() {
+func day5part1() {
 	println("Part 1:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()
@@ -69,7 +69,7 @@ func part1() {
 	println()
 }
 
-func part2() {
+func day5part2() {
 	println("Part 2:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()

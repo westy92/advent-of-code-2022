@@ -8,12 +8,12 @@ import (
 	"strings"
 )
 
-func main() {
-	part1()
-	part2()
+func day4() {
+	day4part1()
+	day4part2()
 }
 
-func part1() {
+func day4part1() {
 	println("Part 1:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()
@@ -37,7 +37,7 @@ func part1() {
 	fmt.Println("Score:", total)
 }
 
-func part2() {
+func day4part2() {
 	println("Part 2:")
 	input, _ := os.Open("input.txt")
 	defer input.Close()
