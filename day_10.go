@@ -25,7 +25,6 @@ func day10() {
 			num, _ := strconv.Atoi(param)
 			x += num
 		} else if text == "noop" {
-			// listing files, will pick up contents in other lines
 			cycles = append(cycles, x)
 		}
 	}
