@@ -42,7 +42,6 @@ func day10() {
 
 	//fmt.Printf("%v\n", cycles)
 
-	cycle = 1
 	for i, item := range cycles {
 		crtPosition := i % 40
 		if item-1 <= crtPosition && crtPosition <= item+1 {
