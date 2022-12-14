@@ -114,7 +114,6 @@ func day13() {
 		packets = append(packets, line1, line2)
 		scanner.Scan() // blank
 		if comparePackets(line1, line2) == valid {
-			println(i)
 			result += i
 		}
 		i++
