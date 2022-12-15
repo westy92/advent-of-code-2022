@@ -17,27 +17,6 @@ type Point struct {
 	y int
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func abs(a int) int {
-	if a > 0 {
-		return a
-	}
-	return -a
-}
-
 func day14() {
 	input, _ := os.Open("input.txt")
 	defer input.Close()
@@ -78,13 +57,14 @@ func day14() {
 		}
 	}
 
-	grid := make([][]bool, maxX-minX+1)
+	width := min(maxX-minX+1, 2*(maxY+1+2))
+	grid := make([][]bool, width)
 
 	for i := range grid {
-		grid[i] = make([]bool, maxY+1)
+		grid[i] = make([]bool, maxY+1+2)
 	}
 
-	// fill grid
+	// fill grid with lines
 	for _, line := range lines {
 		if line.start.x == line.end.x {
 			for y := min(line.start.y, line.end.y); y <= max(line.start.y, line.end.y); y++ {
